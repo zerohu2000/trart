@@ -12,7 +12,7 @@
 				"emulator": "0xf8d6e0586b0a20c7"
 			}
 		},
-		"TrartTemplateNFT": "./contracts/TrartTemplateNFT.cdc"
+		"TrartContractNFT": "./contracts/TrartTemplateNFT.cdc"
 	},
 	"networks": {
 		"emulator": "127.0.0.1:3569"
@@ -25,7 +25,7 @@
 	},
 	"deployments": {
 		"emulator": {
-			"emulator-account": ["NonFungibleToken", "TrartTemplateNFT"]
+			"emulator-account": ["TrartContractNFT", "NonFungibleToken"]
 		}
 	}
 }
