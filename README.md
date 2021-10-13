@@ -20,9 +20,9 @@ TRART is an application that provides users with the opportunity to purchase, co
 
 - Before you start, install Golang and the [Flow command-line interface (CLI)](https://docs.onflow.org/flow-cli).
 
-- See `/go/test/go.mod` to check Golang version in our environment.
+- See `/go/test/go.mod` to check Golang version in your environment.
 
-- The testing program needs to run in linux os or mac os, please check for FLOW documents.
+- The testing program needs to run in linux os or mac os, please check in FLOW documents.
 
 ## 2. Clone the project
 
@@ -33,7 +33,7 @@ TRART is an application that provides users with the opportunity to purchase, co
 - Run `cd go/test` in your workspace folder.
 - Run `go mod tidy` to install golang package dependencies.
 
-## 4. Modify setting to yours.
+## 4. Modify the setting to yours.
 
 - Modify the value fo variant `trartContractName` to your contract name in the file `go/test/trart_test.go`.
 
