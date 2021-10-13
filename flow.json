@@ -1,0 +1,31 @@
+{
+	"emulators": {
+		"default": {
+			"port": 3569,
+			"serviceAccount": "emulator-account"
+		}
+	},
+	"contracts": {
+		"NonFungibleToken": {
+			"source": "./contracts/NonFungibleToken.cdc",
+			"aliases": {
+				"emulator": "0xf8d6e0586b0a20c7"
+			}
+		},
+		"TrartTemplateNFT": "./contracts/TrartTemplateNFT.cdc"
+	},
+	"networks": {
+		"emulator": "127.0.0.1:3569"
+	},
+	"accounts": {
+		"emulator-account": {
+			"address": "f8d6e0586b0a20c7",
+			"key": "ada0e508b64869e6e7728282e9675803f3c1ada5370e30842c3885c351b61d33"
+		}
+	},
+	"deployments": {
+		"emulator": {
+			"emulator-account": ["NonFungibleToken", "TrartTemplateNFT"]
+		}
+	}
+}

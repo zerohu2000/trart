@@ -36,8 +36,8 @@ func TestTrartNFTDeployContracts(t *testing.T) {
 		//query NFTs
 		nfts := flowutils.ExecuteScriptAndCheck(
 			t, b,
-			trartnft.QueryAccountNFTScript(nftAddress.String(), trartNFTAddr.String(), trartNFTAddr.String(), trartContractName),
-			nil,
+			trartnft.QueryAccountNFTScript(nftAddress.String(), trartNFTAddr.String(), trartContractName),
+			[][]byte{jsoncdc.MustEncode(cadence.NewAddress(trartNFTAddr))},
 		)
 		userNfts, _ := nfts.ToGoValue().([]interface{})
 		assert.EqualValues(t, len(mintNFTs), len(userNfts))
@@ -45,8 +45,8 @@ func TestTrartNFTDeployContracts(t *testing.T) {
 		//query a NFT's metadata
 		metadata := flowutils.ExecuteScriptAndCheck(
 			t, b,
-			trartnft.QueryNFTScript(nftAddress.String(), trartNFTAddr.String(), trartContractName, int64(1)),
-			nil,
+			trartnft.QueryNFTScript(nftAddress.String(), trartNFTAddr.String(), trartContractName),
+			[][]byte{jsoncdc.MustEncode(cadence.NewUInt64(1))},
 		)
 		nftMetadata, _ := metadata.ToGoValue().(map[interface{}]interface{})
 		assert.EqualValues(t, "NFT1", nftMetadata["CARD ID"].(string))

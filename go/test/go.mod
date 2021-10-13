@@ -1,6 +1,6 @@
 module github.com/trart/test
 
-go 1.15
+go 1.16
 
 require (
 	github.com/onflow/cadence v0.19.1

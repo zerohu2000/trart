@@ -1,5 +1,7 @@
-import NonFungibleToken from 0xNFTADDRESS
-import TrartContractNFT from 0xTRARTNFTADDRESS
+// SPDX-License-Identifier: MIT
+
+import NonFungibleToken from "../contracts/NonFungibleToken.cdc"
+import TrartContractNFT from "../contracts/TrartTemplateNFT.cdc"
 
 transaction(recipient: Address, cardIDs: [UInt64], metadatas: [{String:String}]) {
     
@@ -20,6 +22,8 @@ transaction(recipient: Address, cardIDs: [UInt64], metadatas: [{String:String}])
             .borrow<&{TrartContractNFT.ICardCollectionPublic}>()
             ?? panic("Could not get receiver reference to the NFT Collection")
 
+        //receiver.deposit(token: <- self.minter.newNFT(cardID: 1, data: {"Name": "Card1", "uri": "ipfs://1-123456789"}))
+
         let collection <- TrartContractNFT.createEmptyCollection()
 
         var i = 0
@@ -29,7 +33,5 @@ transaction(recipient: Address, cardIDs: [UInt64], metadatas: [{String:String}])
         }
 
         receiver.batchDeposit(tokens: <- collection)
-        
-        
     }
 }

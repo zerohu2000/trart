@@ -1,5 +1,7 @@
-import NonFungibleToken from 0xNFTADDRESS
-import TrartContractNFT from 0xTRARTNFTADDRESS
+// SPDX-License-Identifier: MIT
+
+import NonFungibleToken from "../contracts/NonFungibleToken.cdc"
+import TrartContractNFT from "../contracts/TrartTemplateNFT.cdc"
 
 pub struct NFTItem {
   pub let ID: UInt64
@@ -11,10 +13,12 @@ pub struct NFTItem {
   }
 }
 
-pub fun main() : [NFTItem] {
+pub fun main(_ address: Address) : [NFTItem] {
 
-    let account1 = getAccount(0xUSERADDRESS)
+    // Get both public account objects
+    let account1 = getAccount(address)
 
+    // Find the public Receiver capability for their Collections
     let receiver1Ref = account1.getCapability(TrartContractNFT.CollectionPublicPath).borrow<&{TrartContractNFT.ICardCollectionPublic}>()
         ?? panic("Could not borrow account receiver reference:　TrartContractNFT.ICardCollectionPublic")
 

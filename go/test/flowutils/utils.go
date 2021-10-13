@@ -2,6 +2,7 @@ package flowutils
 
 import (
 	"io/ioutil"
+	"regexp"
 	"testing"
 
 	"github.com/onflow/cadence"
@@ -96,4 +97,14 @@ func CreateAccount(t *testing.T, b *emulator.Blockchain) (flow.Address, crypto.S
 	address, err := b.CreateAccount([]*flow.AccountKey{accountKey}, nil)
 	require.NoError(t, err)
 	return address, signer, accountKey
+}
+
+func ReplaceImports(
+	code string,
+	importReplacements map[string]*regexp.Regexp,
+) string {
+	for address, find := range importReplacements {
+		code = find.ReplaceAllString(code, address)
+	}
+	return code
 }

@@ -1,5 +1,7 @@
-import NonFungibleToken from 0xNFTADDRESS
-import TrartContractNFT from 0xTRARTNFTADDRESS
+// SPDX-License-Identifier: MIT
+
+import NonFungibleToken from "../contracts/NonFungibleToken.cdc"
+import TrartContractNFT from "../contracts/TrartTemplateNFT.cdc"
 
 pub fun main(_ address: Address) : UInt64 {
 

@@ -1,6 +1,7 @@
 package trartnft
 
 import (
+	"fmt"
 	"log"
 	"regexp"
 	"testing"
@@ -203,6 +204,12 @@ func replaceAddressPlaceholders(code, nftAddress, trartNftAddress, trartContract
 }
 
 func placeholderTrartNFTCode(nftAddress, contractName string) []byte {
+	// code := string(flowutils.ReadFile(trartContractPath))
+	// code = strings.ReplaceAll(code, "0xNFTADDRESS", "0x"+nftAddress)
+	// code = strings.ReplaceAll(code, "TrartContractNFT", contractName)
+	// //fmt.Println(code)
+	// return []byte(code)
+
 	code := []byte(flowutils.ReplaceImports(
 		string(flowutils.ReadFile(trartContractPath)),
 		map[string]*regexp.Regexp{
@@ -211,12 +218,19 @@ func placeholderTrartNFTCode(nftAddress, contractName string) []byte {
 		},
 	))
 
-	//fmt.Println(string(code))
+	fmt.Println(string(code))
 
 	return code
 }
 
 func SetupAccountScript(nftAddress, trartNftAddress, contractName string) []byte {
+	// code := string(flowutils.ReadFile(trartSetupAccountPath))
+	// code = strings.ReplaceAll(code, "0xNFTADDRESS", "0x"+nftAddress)
+	// code = strings.ReplaceAll(code, "0xTRARTNFTADDRESS", "0x"+trartNftAddress)
+	// code = strings.ReplaceAll(code, "TrartContractNFT", contractName)
+	// //fmt.Println(code)
+	// return []byte(code)
+
 	code := replaceAddressPlaceholders(
 		string(flowutils.ReadFile(trartSetupAccountPath)),
 		"0x"+nftAddress,
@@ -224,12 +238,20 @@ func SetupAccountScript(nftAddress, trartNftAddress, contractName string) []byte
 		contractName,
 	)
 
-	//fmt.Println(string(code))
+	fmt.Println(string(code))
 
 	return []byte(code)
 }
 
 func BatchMintTrartScript(nftAddress, trartNftAddress, contractName string) []byte {
+
+	// code := string(flowutils.ReadFile(trartBatchMintNFTPath))
+	// code = strings.ReplaceAll(code, "0xNFTADDRESS", "0x"+nftAddress)
+	// code = strings.ReplaceAll(code, "0xTRARTNFTADDRESS", "0x"+trartNftAddress)
+	// code = strings.ReplaceAll(code, "TrartContractNFT", contractName)
+	// //fmt.Println(code)
+	// return []byte(code)
+
 	code := replaceAddressPlaceholders(
 		string(flowutils.ReadFile(trartBatchMintNFTPath)),
 		"0x"+nftAddress,
@@ -237,12 +259,19 @@ func BatchMintTrartScript(nftAddress, trartNftAddress, contractName string) []by
 		contractName,
 	)
 
-	//fmt.Println(string(code))
+	fmt.Println(string(code))
 
 	return []byte(code)
 }
 
 func TransferNFTScript(nftAddress, trartNftAddress, contractName string) []byte {
+	// code := string(flowutils.ReadFile(trartTransferNFTPath))
+	// code = strings.ReplaceAll(code, "0xNFTADDRESS", "0x"+nftAddress)
+	// code = strings.ReplaceAll(code, "0xTRARTNFTADDRESS", "0x"+trartNftAddress)
+	// code = strings.ReplaceAll(code, "TrartContractNFT", contractName)
+	// //fmt.Println(code)
+	// return []byte(code)
+
 	code := replaceAddressPlaceholders(
 		string(flowutils.ReadFile(trartTransferNFTPath)),
 		"0x"+nftAddress,
@@ -250,12 +279,19 @@ func TransferNFTScript(nftAddress, trartNftAddress, contractName string) []byte 
 		contractName,
 	)
 
-	//fmt.Println(string(code))
+	fmt.Println(string(code))
 
 	return []byte(code)
 }
 
 func IsInitalizedAccountScript(nftAddress, trartNftAddress, contractName string) []byte {
+	// code := string(flowutils.ReadFile(trartIsInitializedAccountPath))
+	// code = strings.ReplaceAll(code, "0xNFTADDRESS", "0x"+nftAddress)
+	// code = strings.ReplaceAll(code, "0xTRARTNFTADDRESS", "0x"+trartNftAddress)
+	// code = strings.ReplaceAll(code, "TrartContractNFT", contractName)
+	// //fmt.Println(code)
+	// return []byte(code)
+
 	code := replaceAddressPlaceholders(
 		string(flowutils.ReadFile(trartIsInitializedAccountPath)),
 		"0x"+nftAddress,
@@ -263,12 +299,19 @@ func IsInitalizedAccountScript(nftAddress, trartNftAddress, contractName string)
 		contractName,
 	)
 
-	//fmt.Println(string(code))
+	fmt.Println(string(code))
 
 	return []byte(code)
 }
 
 func QueryAccountNFTScript(nftAddress, trartNftAddress, contractName string) []byte {
+	// code := string(flowutils.ReadFile(trartQueryAccountNFTPath))
+	// code = strings.ReplaceAll(code, "0xNFTADDRESS", "0x"+nftAddress)
+	// code = strings.ReplaceAll(code, "0xTRARTNFTADDRESS", "0x"+trartNftAddress)
+	// code = strings.ReplaceAll(code, "TrartContractNFT", contractName)
+	// //fmt.Println(code)
+	// return []byte(code)
+
 	code := replaceAddressPlaceholders(
 		string(flowutils.ReadFile(trartQueryAccountNFTPath)),
 		"0x"+nftAddress,
@@ -276,12 +319,19 @@ func QueryAccountNFTScript(nftAddress, trartNftAddress, contractName string) []b
 		contractName,
 	)
 
-	//fmt.Println(string(code))
+	fmt.Println(string(code))
 
 	return []byte(code)
 }
 
 func QueryNFTScript(nftAddress, trartNftAddress, contractName string) []byte {
+	// code := string(flowutils.ReadFile(trartQueryNFTPath))
+	// code = strings.ReplaceAll(code, "0xNFTADDRESS", "0x"+nftAddress)
+	// code = strings.ReplaceAll(code, "0xTRARTNFTADDRESS", "0x"+trartNftAddress)
+	// code = strings.ReplaceAll(code, "TrartContractNFT", contractName)
+	// //fmt.Println(code)
+	// return []byte(code)
+
 	code := replaceAddressPlaceholders(
 		string(flowutils.ReadFile(trartQueryNFTPath)),
 		"0x"+nftAddress,
@@ -289,7 +339,7 @@ func QueryNFTScript(nftAddress, trartNftAddress, contractName string) []byte {
 		contractName,
 	)
 
-	//fmt.Println(string(code))
+	fmt.Println(string(code))
 
 	return []byte(code)
 }

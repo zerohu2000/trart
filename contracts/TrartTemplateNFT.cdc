@@ -1,4 +1,6 @@
-import NonFungibleToken from 0xNFTADDRESS
+// SPDX-License-Identifier: MIT
+
+import NonFungibleToken from "./NonFungibleToken.cdc"
 
 pub contract TrartContractNFT: NonFungibleToken {
 
@@ -30,6 +32,8 @@ pub contract TrartContractNFT: NonFungibleToken {
     // Metadata
     // -----------------------------------------------------------------------
 
+    // Metadatas are content data of NFTs, those are public data. Anyone can query this to find the detail. 
+    // Initialize the metadata value directly during init phase in the NFT resource section. There is no remove function since as a proof of existence.
     pub struct Metadata {
        pub let cardID: UInt64
        pub let data: {String: String} 
@@ -41,7 +45,6 @@ pub contract TrartContractNFT: NonFungibleToken {
     }
 
     // Get all metadatas
-    //
     pub fun getMetadatas(): {UInt64: Metadata} {
         return self.metadatas;
     }
@@ -54,14 +57,6 @@ pub contract TrartContractNFT: NonFungibleToken {
         return self.metadatas[cardID]
     }
 	
-    access(account) fun setMetadata(cardID: UInt64, data:{String: String}) {
-        self.metadatas[cardID] = Metadata(cardID: cardID, data: data)
-    }
-
-    access(account) fun removeMetadata(cardID: UInt64) {
-        self.metadatas.remove(key: cardID)
-    }
-
     // -----------------------------------------------------------------------
     // NFT
     // -----------------------------------------------------------------------
@@ -69,8 +64,9 @@ pub contract TrartContractNFT: NonFungibleToken {
     pub resource NFT: NonFungibleToken.INFT {
         pub let id: UInt64
 
-        init(initID: UInt64) {
+        init(initID: UInt64, metadata: {String: String}) {
             TrartContractNFT.totalSupply = TrartContractNFT.totalSupply + (1 as UInt64)
+            TrartContractNFT.metadatas[initID] = Metadata(cardID: initID, data: metadata)
 
             self.id = initID
             emit Mint(id: self.id)
@@ -87,8 +83,8 @@ pub contract TrartContractNFT: NonFungibleToken {
     }
 
     // createNFT
-    access(account) fun createNFT(cardID: UInt64): @NFT {
-        return <- create NFT(initID: cardID)
+    access(account) fun createNFT(cardID: UInt64, metadata: {String: String}): @NFT {
+        return <- create NFT(initID: cardID, metadata: metadata)
     }
 
 	// -----------------------------------------------------------------------
@@ -110,7 +106,7 @@ pub contract TrartContractNFT: NonFungibleToken {
     }
 
     pub resource Collection: ICardCollectionPublic, NonFungibleToken.Provider, NonFungibleToken.Receiver, NonFungibleToken.CollectionPublic {
- 
+
         pub var ownedNFTs: @{UInt64: NonFungibleToken.NFT}
 
         init () {
@@ -195,13 +191,11 @@ pub contract TrartContractNFT: NonFungibleToken {
     pub resource NFTMinter {
 
         pub fun newNFT(cardID: UInt64, data: {String: String}): @NFT {
-			TrartContractNFT.setMetadata(cardID: cardID, data: data)
-			return <- TrartContractNFT.createNFT(cardID: cardID)
+			return <- TrartContractNFT.createNFT(cardID: cardID, metadata: data)
         }
 
         pub fun mintNFT(recipient: &{NonFungibleToken.CollectionPublic}, cardID: UInt64, data: {String: String}) {
-            TrartContractNFT.setMetadata(cardID: cardID, data: data)
-			recipient.deposit(token: <- TrartContractNFT.createNFT(cardID: cardID))
+			recipient.deposit(token: <- TrartContractNFT.createNFT(cardID: cardID, metadata: data))
         }
     }
 

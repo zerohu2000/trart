@@ -1,5 +1,7 @@
-import TrartContractNFT from 0xTRARTNFTADDRESS
+// SPDX-License-Identifier: MIT
 
-pub fun main() : {String:String}? {
-    return TrartContractNFT.getMetadataForCardID(cardID: %nftID)?.data
+import TrartContractNFT from "../contracts/TrartTemplateNFT.cdc"
+
+pub fun main(_ nftID: UInt64) : {String:String}? {
+    return TrartContractNFT.getMetadataForCardID(cardID: nftID)?.data
 }
